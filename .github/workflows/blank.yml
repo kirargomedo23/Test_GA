@@ -7,9 +7,28 @@ on:
 
 jobs: 
   build:
+    env:
+      GITHUB_TOKEN: test1234567890
+      DATABASE_URL: localhost:5432/mydb
+      WHATSAPP_API_KEY: 123456789abcdefg
     runs-on: ubuntu-latest
 
     steps:
       - name: Mostrar mensaje
         run: echo "¡Hola, mundo! Este es un mensaje de prueba."
+      - name: Mostrar variables de entorno
+        run: |
+          echo "GITHUB_TOKEN: $GITHUB_TOKEN"
+          echo "DATABASE_URL: $DATABASE_URL"
+          echo "WHATSAPP_API_KEY: $WHATSAPP_API_KEY"
+      - name: Mostrar variables de entorno (sin secretos)
+        run: |
+          echo "GITHUB_TOKEN: ${GITHUB_TOKEN::8}********"
+          echo "DATABASE_URL: ${DATABASE_URL::8}********"
+          echo "WHATSAPP_API_KEY: ${WHATSAPP_API_KEY::8}********"
+      - name: Mostrar variables de entorno (con secretos)
+        run: |
+          echo "GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"
+          echo "DATABASE_URL: ${{ secrets.DATABASE_URL }}"
+          echo "WHATSAPP_API_KEY: ${{ secrets.WHATSAPP_API_KEY }}"
     
