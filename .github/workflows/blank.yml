@@ -21,14 +21,9 @@ jobs:
           echo "GITHUB_TOKEN: $GITHUB_TOKEN"
           echo "DATABASE_URL: $DATABASE_URL"
           echo "WHATSAPP_API_KEY: $WHATSAPP_API_KEY"
-      - name: Mostrar variables de entorno (sin secretos)
+      - name: Mostrar variables de entorno de ENV
         run: |
-          echo "GITHUB_TOKEN: ${GITHUB_TOKEN::8}********"
-          echo "DATABASE_URL: ${DATABASE_URL::8}********"
-          echo "WHATSAPP_API_KEY: ${WHATSAPP_API_KEY::8}********"
-      - name: Mostrar variables de entorno (con secretos)
-        run: |
-          echo "GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"
-          echo "DATABASE_URL: ${{ secrets.DATABASE_URL }}"
-          echo "WHATSAPP_API_KEY: ${{ secrets.WHATSAPP_API_KEY }}"
+          echo "GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}"
+          echo "DATABASE_URL: ${{ env.DATABASE_URL }}"
+          echo "WHATSAPP_API_KEY: ${{ env.WHATSAPP_API_KEY }}"
     
